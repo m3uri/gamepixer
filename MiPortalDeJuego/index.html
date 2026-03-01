@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Juegos - Descarga Directa</title>
+    
+    <link rel="icon" href="imagenes/logo.jpg" type="image/x-icon">
+    
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body { 
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            background-color: #0f1011; 
+            color: #e0e0e0; 
+            margin: 0; 
+        }
+
+        header { 
+            background-color: #161719; 
+            padding: 30px 20px; 
+            text-align: center; 
+            border-bottom: 2px solid #00bcff; 
+        }
+
+        .mi-logo {
+            height: 250px; /* Bajé un poco el tamaño porque 350px era gigante, pero ajustalo a tu gusto */
+            width: auto;
+            margin-bottom: 10px;
+        }
+
+        .buscador-container {
+            text-align: center; 
+            padding: 20px;
+        }
+
+        .buscador-container input {
+            padding: 12px 20px; 
+            width: 80%; 
+            max-width: 500px; 
+            border-radius: 25px; 
+            border: 1px solid #333; 
+            background: #1c1e20; 
+            color: white;
+            outline: none;
+        }
+
+        /* --- GRID Y TARJETAS --- */
+        .grid-juegos { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px; 
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto; 
+        }
+
+        .tarjeta {
+            background-color: #1c1e20;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #2a2c2e;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tarjeta:hover { 
+            transform: translateY(-8px); 
+            border-color: #00bcff; 
+        }
+
+        .tarjeta img { width: 100%; height: 160px; object-fit: cover; }
+
+        .info { padding: 15px; flex-grow: 1; }
+
+        /* --- ESTILO DE LAS CATEGORÍAS --- */
+        .categoria {
+            display: inline-block;
+            background-color: #00bcff;
+            color: #000;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .info h3 { margin: 5px 0; color: #ffffff; font-size: 1.2rem; }
+        
+        .peso-servidor { 
+            font-size: 13px; 
+            color: #888; 
+            margin-top: 5px;
+        }
+
+        .btn-descarga {
+            display: block;
+            background-color: #00bcff;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-descarga:hover { background-color: #ffffff; color: #000000; }
+
+        /* --- BOTÓN FLOTANTE WHATSAPP --- */
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            padding: 15px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 50px;
+            background-color: #161719;
+            border-top: 1px solid #333;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="imagenes/logo.jpg" alt="Mega Juegos Logo" class="mi-logo">
+    <p>Busca, elige y descarga en un clic</p>
+</header>
+
+<div class="buscador-container">
+    <input type="text" placeholder="¿Qué juego buscas?">
+</div>
+
+<div class="grid-juegos">
+
+    <div class="tarjeta">
+        <img src="imagenes/dredge.jpg" alt="Dredge">
+        <div class="info">
+            <span class="categoria">AVENTURA / TERROR</span>
+            <h3>Dredge</h3>
+            <p class="peso-servidor">945 MB | MEDIAFIRE</p>
+        </div>
+        <a href="https://www.mediafire.com/file/spyvknm5qsvhcwj/dredge.rar/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta">
+        <img src="imagenes/portada2.jpg" alt="Juego 2">
+        <div class="info">
+            <span class="categoria">ACCIÓN / SHOOTER</span>
+            <h3>Call of Duty</h3>
+            <p class="peso-servidor">15 GB | GOOGLE DRIVE</p>
+        </div>
+        <a href="#" target="_blank" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+</div>
+
+<a href="https://wa.me/2665277808?text=Hola!%20Me%20gustaria%20pedir%20un%20juego" class="btn-whatsapp" target="_blank">
+    💬 Pedir un juego
+</a>
+
+<footer>
+    <p>&copy; 2026 MEGA JUEGOS PC - El mejor portal de descargas</p>
+    <p>Diseñado con pasión por la comunidad Gamer</p>
+</footer>
+
+</body>
+</html>
