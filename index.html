@@ -8,273 +8,179 @@
     <link rel="icon" href="imagenes/logo.jpg" type="image/x-icon">
     
     <style>
-        /* --- ESTILOS GENERALES --- */
-        body { 
-            font-family: 'Inter', 'Segoe UI', sans-serif; 
-            background-color: #0f1011; 
-            color: #e0e0e0; 
-            margin: 0; 
-        }
+        /* --- ESTILOS BASE --- */
+        body { font-family: 'Inter', sans-serif; background-color: #0f1011; color: #e0e0e0; margin: 0; scroll-behavior: smooth; }
+        header { background-color: #161719; padding: 30px 20px; text-align: center; border-bottom: 2px solid #00bcff; }
+        .mi-logo { height: 180px; width: auto; margin-bottom: 10px; border-radius: 15px; border: 2px solid #333; }
+        .titulo-rgb { font-size: 3rem; margin: 10px 0; font-weight: 900; background: linear-gradient(to right, #00bcff, #ff00ff, #00ff00, #00bcff); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: textGradient 4s linear infinite; }
+        @keyframes textGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
 
-        header { 
-            background-color: #161719; 
-            padding: 30px 20px; 
-            text-align: center; 
-            border-bottom: 2px solid #00bcff; 
-        }
-
-        .mi-logo {
-            height: 180px;
-            width: auto;
-            margin-bottom: 10px;
-            border-radius: 15px;
-        }
-
-        .buscador-container {
-            text-align: center; 
-            padding: 20px 20px 10px 20px;
-        }
-
-        .buscador-container input {
-            padding: 12px 20px; 
-            width: 80%; 
-            max-width: 500px; 
-            border-radius: 25px; 
-            border: 1px solid #333; 
-            background: #1c1e20; 
-            color: white;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .buscador-container input:focus {
-            border-color: #00bcff;
-            box-shadow: 0 0 10px rgba(0, 188, 255, 0.2);
-        }
-
-        /* --- BOTONES DE FILTRO --- */
-        .filtros-container {
-            text-align: center;
-            padding: 0 20px 20px 20px;
-        }
-
-        .btn-filtro {
-            cursor: pointer;
+        /* --- SECCIÓN PRÓXIMO ESTRENO (NUEVO) --- */
+        .seccion-estreno {
+            max-width: 600px;
+            margin: 20px auto;
             background: #1c1e20;
-            color: white;
+            padding: 15px;
+            border-radius: 12px;
             border: 1px solid #333;
-            padding: 8px 15px;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 13px;
-            font-weight: bold;
-            transition: 0.3s;
+            text-align: center;
         }
+        .texto-estreno { font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #00bcff; text-transform: uppercase; letter-spacing: 1px; }
+        .contenedor-barra {
+            background: #000;
+            border-radius: 20px;
+            height: 15px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .barra-progreso {
+            height: 100%;
+            width: 50%; /* CAMBIA ESTE % SEGÚN EL AVANCE */
+            background: linear-gradient(90deg, #00bcff, #ff00ff);
+            box-shadow: 0 0 10px #00bcff;
+            animation: pulseCarga 2s infinite alternate;
+        }
+        @keyframes pulseCarga { from { opacity: 0.8; } to { opacity: 1; } }
 
-        .btn-filtro:hover { border-color: #00bcff; color: #00bcff; }
+        .btn-guia, .btn-suerte { background: #1c1e20; color: #00bcff; border: 1px solid #00bcff; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
+        .btn-guia:hover, .btn-suerte:hover { background: #00bcff; color: black; }
+
+        .buscador-container { text-align: center; padding: 10px 20px; }
+        .buscador-container input { padding: 12px 20px; width: 80%; max-width: 500px; border-radius: 25px; border: 1px solid #333; background: #1c1e20; color: white; outline: none; }
+        
+        .seccion-requisitos { background: #1c1e20; padding: 15px; border-bottom: 1px solid #333; text-align: center; }
+        .btn-req { background: #25282b; color: #aaa; border: 1px solid #444; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-req:hover { border-color: #00bcff; color: white; }
+        .btn-req.active-bajo { background: #00bcff !important; color: black !important; border-color: #00bcff !important; }
+        .btn-req.active-alto { background: #ff4757 !important; color: white !important; border-color: #ff4757 !important; }
+
+        .filtros-container { text-align: center; padding: 15px 0; }
+        .btn-filtro { cursor: pointer; background: #1c1e20; color: white; border: 1px solid #333; padding: 8px 15px; border-radius: 20px; margin: 5px; font-weight: bold; font-size: 13px; }
         .btn-filtro.active { background: #00bcff; color: black; border-color: #00bcff; }
 
-        /* --- GRID Y TARJETAS --- */
-        .grid-juegos { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 30px; 
-            padding: 20px 40px;
-            max-width: 1200px;
-            margin: 0 auto; 
-        }
-
-        .tarjeta {
-            background-color: #1c1e20;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid #2a2c2e;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tarjeta:hover { 
-            transform: translateY(-8px); 
-            border-color: #00bcff; 
-        }
-
-        .tarjeta img { width: 100%; height: 160px; object-fit: cover; }
-
+        .grid-juegos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 20px 40px; max-width: 1200px; margin: 0 auto; }
+        .tarjeta { background-color: #1c1e20; border-radius: 15px; overflow: hidden; border: 1px solid #2a2c2e; transition: 0.4s; display: flex; flex-direction: column; }
+        .tarjeta:hover { transform: translateY(-8px); border-color: #00bcff; }
+        .img-container { overflow: hidden; height: 160px; }
+        .tarjeta img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .tarjeta:hover img { transform: scale(1.1); }
         .info { padding: 15px; flex-grow: 1; }
-
-        .categoria {
-            display: inline-block;
-            background-color: #00bcff;
-            color: #000;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 5px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .info h3 { margin: 5px 0; color: #ffffff; font-size: 1.2rem; text-transform: capitalize; }
         
-        .peso-servidor { 
-            font-size: 13px; 
-            color: #00bcff; 
-            margin-top: 5px;
-            font-weight: bold;
-        }
+        .tag-requisito { font-size: 10px; font-weight: bold; color: #00bcff; text-transform: uppercase; display: block; margin-bottom: 5px; }
 
-        .requisitos {
-            background: #151618;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 10px;
-            border: 1px dashed #333;
+        .btn-requisitos {
+            background: none; border: 1px solid #444; color: #888; padding: 8px 12px;
+            border-radius: 5px; cursor: pointer; font-size: 11px; width: 100%;
+            text-align: left; transition: 0.2s; display: flex; justify-content: space-between; margin-top: 10px;
         }
+        .btn-requisitos:hover { background: #252729; color: white; }
 
-        .requisitos h4 {
-            margin: 0 0 5px 0;
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-        }
+        .requisitos-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #151618; border-radius: 0 0 8px 8px; }
+        .requisitos-inner { padding: 10px; font-size: 12px; color: #bbb; border: 1px dashed #333; border-top: none; }
+        .requisitos-inner ul { margin: 0; padding: 0; list-style: none; line-height: 1.6; }
 
-        .requisitos ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-size: 12px;
-            color: #bbb;
-        }
-
-        .btn-descarga {
-            display: block;
-            background-color: #00bcff;
-            color: white;
-            padding: 15px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
-            transition: 0.2s;
-            margin-top: 10px;
-        }
-
-        .btn-descarga:hover { background-color: #ffffff; color: #000000; }
-
-        .btn-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            border-radius: 50px;
-            padding: 15px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: 0.3s;
-        }
-        .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            margin-top: 50px;
-            background-color: #161719;
-            border-top: 1px solid #333;
-            color: #777;
-        }
+        .btn-descarga { display: block; background: #00bcff; color: white; padding: 15px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 10px; }
+        .btn-descarga:hover { background: white; color: black; }
+        .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; border-radius: 50px; padding: 15px 20px; text-decoration: none; font-weight: bold; z-index: 1000; }
+        footer { text-align: center; padding: 40px; background: #0a0b0c; color: #777; border-top: 1px solid #333; }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="imagenes/logo.jpg" alt="Mega Juegos Logo" class="mi-logo">
-    <h1>GamePixer</h1>
-    <p>Busca, elige y descarga en un clic</p>
+    <img src="imagenes/logo.jpg" alt="Logo" class="mi-logo">
+    <h1 class="titulo-rgb">GamePixer</h1>
+    <button class="btn-guia" onclick="abrirGuia()">📖 GUÍA DE INSTALACIÓN</button>
+    <button class="btn-suerte" onclick="juegoAzar()">🎲 SORPRÉNDEME</button>
 </header>
 
+<div class="seccion-estreno">
+    <div class="texto-estreno">⏳ PRÓXIMO ESTRENO: project zomboid (50%)</div>
+    <div class="contenedor-barra">
+        <div class="barra-progreso"></div>
+    </div>
+</div>
+
 <div class="buscador-container">
-    <input type="text" id="inputBuscador" onkeyup="buscarJuego()" placeholder="¿Qué juego buscas?">
+    <input type="text" id="inputBuscador" onkeyup="buscarJuego()" placeholder="¿Buscas algún juego?">
+</div>
+
+<div class="seccion-requisitos">
+    <p style="font-size: 11px; color: #555; margin-bottom: 8px; font-weight: bold;">FILTRAR POR RENDIMIENTO:</p>
+    <button class="btn-req" id="btnBajo" onclick="filtrarRequisitos('BAJO', this)">💻 PC DE CARTÓN</button>
+    <button class="btn-req" id="btnAlto" onclick="filtrarRequisitos('ALTO', this)">🔥 PC GAMER</button>
+    <button class="btn-req" onclick="filtrarRequisitos('TODOS', this)">MOSTRAR TODO</button>
 </div>
 
 <div class="filtros-container">
-    <button class="btn-filtro active" onclick="filtrarCategoria('TODOS', this)">Todos</button>
-    <button class="btn-filtro" onclick="filtrarCategoria('ACCIÓN', this)">Acción</button>
-    <button class="btn-filtro" onclick="filtrarCategoria('AVENTURA', this)">Aventura</button>
-    <button class="btn-filtro" onclick="filtrarCategoria('TERROR', this)">Terror</button>
+    <button class="btn-filtro active" onclick="filtrarCategoria('TODOS', this)">TODOS</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('ACCIÓN', this)">ACCIÓN</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('AVENTURA', this)">AVENTURA</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('TERROR', this)">TERROR</button>
 </div>
 
 <div class="grid-juegos" id="contenedorJuegos">
 
-    <div class="tarjeta">
-        <img src="imagenes/dredge.jpg" alt="Dredge">
+    <div class="tarjeta" data-requisito="ALTO">
+        <div class="img-container"><img src="imagenes/dredge.jpg" alt="Dredge"></div>
         <div class="info">
-            <span class="categoria">AVENTURA / TERROR</span>
+            <span class="tag-requisito">Requisitos Medios</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA / TERROR</span>
             <h3>Dredge</h3>
-            <p class="peso-servidor">945 MB | MEDIAFIRE</p>
-            <div class="requisitos">
-                <h4>Requisitos mínimos:</h4>
-                <ul>
-                    <li>💻 RAM: 4 GB</li>
-                    <li>🎮 Gráfica: GT 520</li>
-                    <li>💾 Espacio: 2 GB</li>
-                </ul>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content">
+                <div class="requisitos-inner">
+                    <ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: GT 520</li><li>💾 Espacio: 2 GB</li></ul>
+                </div>
             </div>
         </div>
         <a href="https://www.mediafire.com/file/spyvknm5qsvhcwj/dredge.rar/file" target="_blank" class="btn-descarga">DESCARGAR</a>
     </div>
 
-    <div class="tarjeta">
-        <img src="imagenes/geometridash.jpg" alt="geometry dash">
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/geometridash.jpg" alt="Geometry Dash"></div>
         <div class="info">
-            <span class="categoria">ACCIÓN</span>
-            <h3>geometry dash</h3>
-            <p class="peso-servidor">316.67 MB | MEDIAFIRE</p>
-            <div class="requisitos">
-                <h4>Requisitos mínimos:</h4>
-                <ul>
-                    <li>💻 RAM: 512 MB</li>
-                    <li>🎮 Gráfica: OpenGL 2.0</li>
-                    <li>💾 Espacio: 100 MB</li>
-                </ul>
+            <span class="tag-requisito" style="color: #00bcff;">Bajos Requisitos 💻</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">ACCIÓN</span>
+            <h3>Geometry Dash</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content">
+                <div class="requisitos-inner">
+                    <ul><li>💻 RAM: 512 MB</li><li>🎮 Gráfica: Integrada</li><li>💾 Espacio: 100 MB</li></ul>
+                </div>
             </div>
         </div>
         <a href="https://www.mediafire.com/file/88488wd72eqauvp/geometry_dash.zip/file" target="_blank" class="btn-descarga">DESCARGAR</a>
     </div>
 
-    <div class="tarjeta">
-        <img src="imagenes/terraria.jpg" alt="terraria">
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/terraria.jpg" alt="Terraria"></div>
         <div class="info">
-            <span class="categoria">ACCIÓN / AVENTURA</span>
-            <h3>terraria</h3>
-            <p class="peso-servidor">716 MB | MEDIAFIRE</p>
-            <div class="requisitos">
-                <h4>Requisitos mínimos:</h4>
-                <ul>
-                    <li>💻 RAM: 4 GB</li>
-                    <li>🎮 Gráfica: 128 MB VRAM</li>
-                    <li>💾 Espacio: 200 MB</li>
-                </ul>
+            <span class="tag-requisito" style="color: #00bcff;">Bajos Requisitos 💻</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
+            <h3>Terraria</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content">
+                <div class="requisitos-inner">
+                    <ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: 128MB VRAM</li><li>💾 Espacio: 200 MB</li></ul>
+                </div>
             </div>
         </div>
         <a href="https://www.mediafire.com/file/nb16j1nbk3xlnbg/Terraria.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
     </div>
 
-    <div class="tarjeta">
-        <img src="imagenes/minecraft.jpg" alt="minecraft bedrock edition">
+    <div class="tarjeta" data-requisito="ALTO">
+        <div class="img-container"><img src="imagenes/minecrtaft.jpg" alt="Minecraft"></div>
         <div class="info">
-            <span class="categoria">ACCIÓN / AVENTURA</span>
-            <h3>minecraft bedrock</h3>
-            <p class="peso-servidor">719.83 MB | MEDIAFIRE</p>
-            <div class="requisitos">
-                <h4>Requisitos mínimos:</h4>
-                <ul>
-                    <li>💻 RAM: 4 GB</li>
-                    <li>🎮 Gráfica: Intel HD 4000</li>
-                    <li>💾 Espacio: 1 GB</li>
-                </ul>
+            <span class="tag-requisito">Requisitos Medios</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
+            <h3>Minecraft Bedrock</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content">
+                <div class="requisitos-inner">
+                    <ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: Intel HD 4000</li><li>💾 Espacio: 1 GB</li></ul>
+                </div>
             </div>
         </div>
         <a href="https://www.mediafire.com/file/7mk994oiqe074ow/Minecraft_Bedrock_Edition.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
@@ -282,49 +188,71 @@
 
 </div>
 
-<a href="https://wa.me/2665277808?text=Hola!%20Me%20gustaria%20pedir%20un%20juego" class="btn-whatsapp" target="_blank">
-    💬 Pedir un juego
-</a>
+<a href="https://wa.me/2665277808" class="btn-whatsapp" target="_blank">💬 Pedir un juego</a>
 
-<footer>
-    <p>&copy; 2026 GAMEPIXER PC - El mejor portal de descargas</p>
-    <p>Diseñado con pasión por la comunidad Gamer</p>
-</footer>
+<footer><p>&copy; 2026 GAMEPIXER PC</p></footer>
 
 <script>
-// Función para el buscador de texto
+let reqActual = 'TODOS';
+let catActual = 'TODOS';
+
+function toggleRequisitos(btn) {
+    let content = btn.nextElementSibling;
+    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+        content.style.maxHeight = "0px";
+        btn.querySelector('span').innerText = "▼";
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        btn.querySelector('span').innerText = "▲";
+    }
+}
+
+function filtrarRequisitos(req, btn) {
+    let botones = document.querySelectorAll('.btn-req');
+    botones.forEach(b => b.classList.remove('active-bajo', 'active-alto'));
+    if(req === 'BAJO') btn.classList.add('active-bajo');
+    if(req === 'ALTO') btn.classList.add('active-alto');
+    reqActual = req;
+    aplicarFiltros();
+}
+
+function filtrarCategoria(cat, btn) {
+    let botones = document.querySelectorAll('.btn-filtro');
+    botones.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    catActual = cat;
+    aplicarFiltros();
+}
+
+function aplicarFiltros() {
+    let juegos = document.getElementsByClassName('tarjeta');
+    for (let i = 0; i < juegos.length; i++) {
+        let reqJuego = juegos[i].getAttribute('data-requisito');
+        let catJuego = juegos[i].querySelector('.categoria').innerText;
+        let cumpleReq = (reqActual === 'TODOS' || reqJuego === reqActual);
+        let cumpleCat = (catActual === 'TODOS' || catJuego.includes(catActual));
+        juegos[i].style.display = (cumpleReq && cumpleCat) ? "" : "none";
+    }
+}
+
 function buscarJuego() {
     let input = document.getElementById('inputBuscador').value.toLowerCase();
     let juegos = document.getElementsByClassName('tarjeta');
-    
     for (let i = 0; i < juegos.length; i++) {
         let titulo = juegos[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-        if (titulo.includes(input)) {
-            juegos[i].style.display = "";
-        } else {
-            juegos[i].style.display = "none";
-        }
+        juegos[i].style.display = titulo.includes(input) ? "" : "none";
     }
 }
 
-// Función para los botones de filtro
-function filtrarCategoria(cat, btn) {
-    // Cambiar estilo del botón activo
-    let botones = document.getElementsByClassName('btn-filtro');
-    for (let b of botones) { b.classList.remove('active'); }
-    btn.classList.add('active');
-
-    let juegos = document.getElementsByClassName('tarjeta');
-    for (let i = 0; i < juegos.length; i++) {
-        let categoriaTexto = juegos[i].querySelector('.categoria').innerText;
-        if (cat === 'TODOS' || categoriaTexto.includes(cat)) {
-            juegos[i].style.display = "";
-        } else {
-            juegos[i].style.display = "none";
-        }
+function juegoAzar() {
+    let tarjetas = document.querySelectorAll('.tarjeta[style="display: ;"], .tarjeta[style=""]');
+    if(tarjetas.length > 0) {
+        let elegido = tarjetas[Math.floor(Math.random() * tarjetas.length)];
+        elegido.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        elegido.style.borderColor = "#00bcff";
+        setTimeout(() => { elegido.style.borderColor = "#2a2c2e"; }, 2000);
     }
 }
 </script>
-
 </body>
 </html>
