@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Juegos - Descarga Directa</title>
+    <title>GamePixer | Descarga Directa</title>
     
     <link rel="icon" href="imagenes/logo.jpg" type="image/x-icon">
     
@@ -24,14 +24,15 @@
         }
 
         .mi-logo {
-            height: 250px; /* Bajé un poco el tamaño porque 350px era gigante, pero ajustalo a tu gusto */
+            height: 180px;
             width: auto;
             margin-bottom: 10px;
+            border-radius: 15px;
         }
 
         .buscador-container {
             text-align: center; 
-            padding: 20px;
+            padding: 20px 20px 10px 20px;
         }
 
         .buscador-container input {
@@ -43,7 +44,35 @@
             background: #1c1e20; 
             color: white;
             outline: none;
+            transition: 0.3s;
         }
+
+        .buscador-container input:focus {
+            border-color: #00bcff;
+            box-shadow: 0 0 10px rgba(0, 188, 255, 0.2);
+        }
+
+        /* --- BOTONES DE FILTRO --- */
+        .filtros-container {
+            text-align: center;
+            padding: 0 20px 20px 20px;
+        }
+
+        .btn-filtro {
+            cursor: pointer;
+            background: #1c1e20;
+            color: white;
+            border: 1px solid #333;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-filtro:hover { border-color: #00bcff; color: #00bcff; }
+        .btn-filtro.active { background: #00bcff; color: black; border-color: #00bcff; }
 
         /* --- GRID Y TARJETAS --- */
         .grid-juegos { 
@@ -74,7 +103,6 @@
 
         .info { padding: 15px; flex-grow: 1; }
 
-        /* --- ESTILO DE LAS CATEGORÍAS --- */
         .categoria {
             display: inline-block;
             background-color: #00bcff;
@@ -87,12 +115,36 @@
             margin-bottom: 10px;
         }
 
-        .info h3 { margin: 5px 0; color: #ffffff; font-size: 1.2rem; }
+        .info h3 { margin: 5px 0; color: #ffffff; font-size: 1.2rem; text-transform: capitalize; }
         
         .peso-servidor { 
             font-size: 13px; 
-            color: #888; 
+            color: #00bcff; 
             margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .requisitos {
+            background: #151618;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px dashed #333;
+        }
+
+        .requisitos h4 {
+            margin: 0 0 5px 0;
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .requisitos ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12px;
+            color: #bbb;
         }
 
         .btn-descarga {
@@ -104,11 +156,11 @@
             text-align: center;
             font-weight: bold;
             transition: 0.2s;
+            margin-top: 10px;
         }
 
         .btn-descarga:hover { background-color: #ffffff; color: #000000; }
 
-        /* --- BOTÓN FLOTANTE WHATSAPP --- */
         .btn-whatsapp {
             position: fixed;
             bottom: 20px;
@@ -125,7 +177,6 @@
         }
         .btn-whatsapp:hover { transform: scale(1.1); background-color: #128c7e; }
 
-        /* --- FOOTER --- */
         footer {
             text-align: center;
             padding: 40px;
@@ -140,14 +191,22 @@
 
 <header>
     <img src="imagenes/logo.jpg" alt="Mega Juegos Logo" class="mi-logo">
+    <h1>GamePixer</h1>
     <p>Busca, elige y descarga en un clic</p>
 </header>
 
 <div class="buscador-container">
-    <input type="text" placeholder="¿Qué juego buscas?">
+    <input type="text" id="inputBuscador" onkeyup="buscarJuego()" placeholder="¿Qué juego buscas?">
 </div>
 
-<div class="grid-juegos">
+<div class="filtros-container">
+    <button class="btn-filtro active" onclick="filtrarCategoria('TODOS', this)">Todos</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('ACCIÓN', this)">Acción</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('AVENTURA', this)">Aventura</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('TERROR', this)">Terror</button>
+</div>
+
+<div class="grid-juegos" id="contenedorJuegos">
 
     <div class="tarjeta">
         <img src="imagenes/dredge.jpg" alt="Dredge">
@@ -155,6 +214,14 @@
             <span class="categoria">AVENTURA / TERROR</span>
             <h3>Dredge</h3>
             <p class="peso-servidor">945 MB | MEDIAFIRE</p>
+            <div class="requisitos">
+                <h4>Requisitos mínimos:</h4>
+                <ul>
+                    <li>💻 RAM: 4 GB</li>
+                    <li>🎮 Gráfica: GT 520</li>
+                    <li>💾 Espacio: 2 GB</li>
+                </ul>
+            </div>
         </div>
         <a href="https://www.mediafire.com/file/spyvknm5qsvhcwj/dredge.rar/file" target="_blank" class="btn-descarga">DESCARGAR</a>
     </div>
@@ -165,8 +232,52 @@
             <span class="categoria">ACCIÓN</span>
             <h3>geometry dash</h3>
             <p class="peso-servidor">316.67 MB | MEDIAFIRE</p>
+            <div class="requisitos">
+                <h4>Requisitos mínimos:</h4>
+                <ul>
+                    <li>💻 RAM: 512 MB</li>
+                    <li>🎮 Gráfica: OpenGL 2.0</li>
+                    <li>💾 Espacio: 100 MB</li>
+                </ul>
+            </div>
         </div>
         <a href="https://www.mediafire.com/file/88488wd72eqauvp/geometry_dash.zip/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta">
+        <img src="imagenes/terraria.jpg" alt="terraria">
+        <div class="info">
+            <span class="categoria">ACCIÓN / AVENTURA</span>
+            <h3>terraria</h3>
+            <p class="peso-servidor">716 MB | MEDIAFIRE</p>
+            <div class="requisitos">
+                <h4>Requisitos mínimos:</h4>
+                <ul>
+                    <li>💻 RAM: 4 GB</li>
+                    <li>🎮 Gráfica: 128 MB VRAM</li>
+                    <li>💾 Espacio: 200 MB</li>
+                </ul>
+            </div>
+        </div>
+        <a href="https://www.mediafire.com/file/nb16j1nbk3xlnbg/Terraria.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta">
+        <img src="imagenes/minecraft.jpg" alt="minecraft bedrock edition">
+        <div class="info">
+            <span class="categoria">ACCIÓN / AVENTURA</span>
+            <h3>minecraft bedrock</h3>
+            <p class="peso-servidor">719.83 MB | MEDIAFIRE</p>
+            <div class="requisitos">
+                <h4>Requisitos mínimos:</h4>
+                <ul>
+                    <li>💻 RAM: 4 GB</li>
+                    <li>🎮 Gráfica: Intel HD 4000</li>
+                    <li>💾 Espacio: 1 GB</li>
+                </ul>
+            </div>
+        </div>
+        <a href="https://www.mediafire.com/file/7mk994oiqe074ow/Minecraft_Bedrock_Edition.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
     </div>
 
 </div>
@@ -176,9 +287,44 @@
 </a>
 
 <footer>
-    <p>&copy; 2026 MEGA JUEGOS PC - El mejor portal de descargas</p>
+    <p>&copy; 2026 GAMEPIXER PC - El mejor portal de descargas</p>
     <p>Diseñado con pasión por la comunidad Gamer</p>
 </footer>
+
+<script>
+// Función para el buscador de texto
+function buscarJuego() {
+    let input = document.getElementById('inputBuscador').value.toLowerCase();
+    let juegos = document.getElementsByClassName('tarjeta');
+    
+    for (let i = 0; i < juegos.length; i++) {
+        let titulo = juegos[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        if (titulo.includes(input)) {
+            juegos[i].style.display = "";
+        } else {
+            juegos[i].style.display = "none";
+        }
+    }
+}
+
+// Función para los botones de filtro
+function filtrarCategoria(cat, btn) {
+    // Cambiar estilo del botón activo
+    let botones = document.getElementsByClassName('btn-filtro');
+    for (let b of botones) { b.classList.remove('active'); }
+    btn.classList.add('active');
+
+    let juegos = document.getElementsByClassName('tarjeta');
+    for (let i = 0; i < juegos.length; i++) {
+        let categoriaTexto = juegos[i].querySelector('.categoria').innerText;
+        if (cat === 'TODOS' || categoriaTexto.includes(cat)) {
+            juegos[i].style.display = "";
+        } else {
+            juegos[i].style.display = "none";
+        }
+    }
+}
+</script>
 
 </body>
 </html>
