@@ -4,83 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamePixer | Descarga Directa</title>
-    
     <link rel="icon" href="imagenes/logo.jpg" type="image/x-icon">
-    
     <style>
-        /* --- ESTILOS BASE --- */
         body { font-family: 'Inter', sans-serif; background-color: #0f1011; color: #e0e0e0; margin: 0; scroll-behavior: smooth; }
         header { background-color: #161719; padding: 30px 20px; text-align: center; border-bottom: 2px solid #00bcff; }
         .mi-logo { height: 180px; width: auto; margin-bottom: 10px; border-radius: 15px; border: 2px solid #333; }
         .titulo-rgb { font-size: 3rem; margin: 10px 0; font-weight: 900; background: linear-gradient(to right, #00bcff, #ff00ff, #00ff00, #00bcff); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: textGradient 4s linear infinite; }
         @keyframes textGradient { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-
-        /* --- SECCIÓN PRÓXIMO ESTRENO (NUEVO) --- */
-        .seccion-estreno {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #1c1e20;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            text-align: center;
-        }
+        .seccion-estreno { max-width: 600px; margin: 20px auto; background: #1c1e20; padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
         .texto-estreno { font-size: 14px; font-weight: bold; margin-bottom: 8px; color: #00bcff; text-transform: uppercase; letter-spacing: 1px; }
-        .contenedor-barra {
-            background: #000;
-            border-radius: 20px;
-            height: 15px;
-            width: 100%;
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-        .barra-progreso {
-            height: 100%;
-            width: 50%; /* CAMBIA ESTE % SEGÚN EL AVANCE */
-            background: linear-gradient(90deg, #00bcff, #ff00ff);
-            box-shadow: 0 0 10px #00bcff;
-            animation: pulseCarga 2s infinite alternate;
-        }
+        .contenedor-barra { background: #000; border-radius: 20px; height: 15px; width: 100%; overflow: hidden; border: 1px solid #333; }
+        .barra-progreso { height: 100%; width: 50%; background: linear-gradient(90deg, #00bcff, #ff00ff); box-shadow: 0 0 10px #00bcff; animation: pulseCarga 2s infinite alternate; }
         @keyframes pulseCarga { from { opacity: 0.8; } to { opacity: 1; } }
-
         .btn-guia, .btn-suerte { background: #1c1e20; color: #00bcff; border: 1px solid #00bcff; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; margin: 5px; transition: 0.3s; }
         .btn-guia:hover, .btn-suerte:hover { background: #00bcff; color: black; }
-
         .buscador-container { text-align: center; padding: 10px 20px; }
         .buscador-container input { padding: 12px 20px; width: 80%; max-width: 500px; border-radius: 25px; border: 1px solid #333; background: #1c1e20; color: white; outline: none; }
-        
         .seccion-requisitos { background: #1c1e20; padding: 15px; border-bottom: 1px solid #333; text-align: center; }
         .btn-req { background: #25282b; color: #aaa; border: 1px solid #444; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin: 5px; font-weight: bold; transition: 0.3s; }
-        .btn-req:hover { border-color: #00bcff; color: white; }
-        .btn-req.active-bajo { background: #00bcff !important; color: black !important; border-color: #00bcff !important; }
-        .btn-req.active-alto { background: #ff4757 !important; color: white !important; border-color: #ff4757 !important; }
-
+        .btn-req.active-bajo { background: #00bcff !important; color: black !important; }
+        .btn-req.active-alto { background: #ff4757 !important; color: white !important; }
         .filtros-container { text-align: center; padding: 15px 0; }
         .btn-filtro { cursor: pointer; background: #1c1e20; color: white; border: 1px solid #333; padding: 8px 15px; border-radius: 20px; margin: 5px; font-weight: bold; font-size: 13px; }
         .btn-filtro.active { background: #00bcff; color: black; border-color: #00bcff; }
-
         .grid-juegos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 20px 40px; max-width: 1200px; margin: 0 auto; }
         .tarjeta { background-color: #1c1e20; border-radius: 15px; overflow: hidden; border: 1px solid #2a2c2e; transition: 0.4s; display: flex; flex-direction: column; }
         .tarjeta:hover { transform: translateY(-8px); border-color: #00bcff; }
         .img-container { overflow: hidden; height: 160px; }
-        .tarjeta img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .tarjeta:hover img { transform: scale(1.1); }
+        .tarjeta img { width: 100%; height: 100%; object-fit: cover; }
         .info { padding: 15px; flex-grow: 1; }
-        
         .tag-requisito { font-size: 10px; font-weight: bold; color: #00bcff; text-transform: uppercase; display: block; margin-bottom: 5px; }
-
-        .btn-requisitos {
-            background: none; border: 1px solid #444; color: #888; padding: 8px 12px;
-            border-radius: 5px; cursor: pointer; font-size: 11px; width: 100%;
-            text-align: left; transition: 0.2s; display: flex; justify-content: space-between; margin-top: 10px;
-        }
-        .btn-requisitos:hover { background: #252729; color: white; }
-
-        .requisitos-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #151618; border-radius: 0 0 8px 8px; }
+        .caja-password { background: #000; border: 1px dashed #444; border-radius: 8px; padding: 8px; margin-top: 10px; text-align: center; font-size: 11px; color: #888; }
+        .caja-password strong { color: #00bcff; }
+        .btn-requisitos { background: none; border: 1px solid #444; color: #888; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 11px; width: 100%; text-align: left; display: flex; justify-content: space-between; margin-top: 10px; }
+        .requisitos-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #151618; }
         .requisitos-inner { padding: 10px; font-size: 12px; color: #bbb; border: 1px dashed #333; border-top: none; }
-        .requisitos-inner ul { margin: 0; padding: 0; list-style: none; line-height: 1.6; }
-
-        .btn-descarga { display: block; background: #00bcff; color: white; padding: 15px; text-decoration: none; text-align: center; font-weight: bold; margin-top: 10px; }
+        .requisitos-inner ul { margin: 0; padding: 0; list-style: none; }
+        .btn-descarga { display: block; background: #00bcff; color: white; padding: 15px; text-decoration: none; text-align: center; font-weight: bold; margin-top: auto; }
         .btn-descarga:hover { background: white; color: black; }
         .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; border-radius: 50px; padding: 15px 20px; text-decoration: none; font-weight: bold; z-index: 1000; }
         footer { text-align: center; padding: 40px; background: #0a0b0c; color: #777; border-top: 1px solid #333; }
@@ -97,9 +57,7 @@
 
 <div class="seccion-estreno">
     <div class="texto-estreno">⏳ PRÓXIMO ESTRENO: project zomboid (50%)</div>
-    <div class="contenedor-barra">
-        <div class="barra-progreso"></div>
-    </div>
+    <div class="contenedor-barra"><div class="barra-progreso"></div></div>
 </div>
 
 <div class="buscador-container">
@@ -118,78 +76,183 @@
     <button class="btn-filtro" onclick="filtrarCategoria('ACCIÓN', this)">ACCIÓN</button>
     <button class="btn-filtro" onclick="filtrarCategoria('AVENTURA', this)">AVENTURA</button>
     <button class="btn-filtro" onclick="filtrarCategoria('TERROR', this)">TERROR</button>
+    <button class="btn-filtro" onclick="filtrarCategoria('PELEA', this)">PELEA</button>
 </div>
 
 <div class="grid-juegos" id="contenedorJuegos">
 
-    <div class="tarjeta" data-requisito="ALTO">
-        <div class="img-container"><img src="imagenes/dredge.jpg" alt="Dredge"></div>
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/mk 1.jpg" alt="Mortal Kombat 1"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">PELEA / ACCIÓN</span>
+            <h3>Mortal Kombat 1 (Classic)</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: Integrada Intel</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/uuafy6p45zyuf50/MORTAL_KOMBAT_1.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/mk 2.jpg" alt="Mortal Kombat 2"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">PELEA / ACCIÓN</span>
+            <h3>Mortal Kombat 2</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: Integrada Intel</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/wenqun0x2u6hn5w/MORTAL_KOMBAT_2.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/mk 3.jpg" alt="Mortal Kombat 3"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">PELEA / ACCIÓN</span>
+            <h3>Mortal Kombat 3</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: Integrada Intel</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/0l86cm60s8a2ce8/MORTAL_KOMBAT_3.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/doom 1.jpg" alt="Doom 1"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">ACCIÓN / FPS</span>
+            <h3>Doom 1</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 1 GB</li><li>🎮 Gráfica: Genérica</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/7cjsrg2r5k3xvma/Doom_1.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/doom 2.jpg" alt="Doom 2"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">ACCIÓN / FPS</span>
+            <h3>Doom 2</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 1 GB</li><li>🎮 Gráfica: Genérica</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/2aodacdw733qvou/Doom_2.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/doom 3.jpg" alt="Doom 3"></div>
         <div class="info">
             <span class="tag-requisito">Requisitos Medios</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">ACCIÓN / TERROR</span>
+            <h3>Doom 3 (BFG Edition)</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 3 GB</li><li>🎮 Gráfica: 512MB VRAM</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/buujd9rqsb7e8dl/Doom_3_BFG_EDITION_-_RanDyso.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/super mario bros.jpg" alt="Super Mario Bros"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
+            <h3>Super Mario Bros</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 1 GB</li><li>🎮 Gráfica: Genérica</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/9eaolq4cr1rz6fc/super_mario_bros_1.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/mario collection.jpg" alt="Mario Collection"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
+            <h3>Mario Collection</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 1 GB</li><li>🎮 Gráfica: Genérica</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/w9njimq8pnwq54l/Mario_Bros_Collection.rar/file" class="btn-descarga">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/minecrtaft.jpg" alt="Minecraft"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA / ACCIÓN</span>
+            <h3>Minecraft</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: Intel HD 4000</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/7mk994oiqe074ow/Minecraft_Bedrock_Edition.iso/file" class="btn-descarga" target="_blank">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/dredge.jpg" alt="Dredge"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
             <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA / TERROR</span>
             <h3>Dredge</h3>
-            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
-            <div class="requisitos-content">
-                <div class="requisitos-inner">
-                    <ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: GT 520</li><li>💾 Espacio: 2 GB</li></ul>
-                </div>
-            </div>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: GT 440</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
         </div>
-        <a href="https://www.mediafire.com/file/spyvknm5qsvhcwj/dredge.rar/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+        <a href="https://www.mediafire.com/file/spyvknm5qsvhcwj/dredge.rar/file" class="btn-descarga" target="_blank">DESCARGAR</a>
     </div>
 
     <div class="tarjeta" data-requisito="BAJO">
         <div class="img-container"><img src="imagenes/geometridash.jpg" alt="Geometry Dash"></div>
         <div class="info">
-            <span class="tag-requisito" style="color: #00bcff;">Bajos Requisitos 💻</span>
+            <span class="tag-requisito">Requisitos Bajos</span>
             <span class="categoria" style="font-size: 10px; color: #666;">ACCIÓN</span>
             <h3>Geometry Dash</h3>
-            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
-            <div class="requisitos-content">
-                <div class="requisitos-inner">
-                    <ul><li>💻 RAM: 512 MB</li><li>🎮 Gráfica: Integrada</li><li>💾 Espacio: 100 MB</li></ul>
-                </div>
-            </div>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 1 GB</li><li>🎮 Gráfica: Integrada</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
         </div>
-        <a href="https://www.mediafire.com/file/88488wd72eqauvp/geometry_dash.zip/file" target="_blank" class="btn-descarga">DESCARGAR</a>
-    </div>
-
-    <div class="tarjeta" data-requisito="BAJO">
-        <div class="img-container"><img src="imagenes/terraria.jpg" alt="Terraria"></div>
-        <div class="info">
-            <span class="tag-requisito" style="color: #00bcff;">Bajos Requisitos 💻</span>
-            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
-            <h3>Terraria</h3>
-            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
-            <div class="requisitos-content">
-                <div class="requisitos-inner">
-                    <ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: 128MB VRAM</li><li>💾 Espacio: 200 MB</li></ul>
-                </div>
-            </div>
-        </div>
-        <a href="https://www.mediafire.com/file/nb16j1nbk3xlnbg/Terraria.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+        <a href="https://www.mediafire.com/file/88488wd72eqauvp/geometry_dash.zip/file" class="btn-descarga" target="_blank">DESCARGAR</a>
     </div>
 
     <div class="tarjeta" data-requisito="ALTO">
-        <div class="img-container"><img src="imagenes/minecrtaft.jpg" alt="Minecraft"></div>
+        <div class="img-container"><img src="imagenes/Resident Evil 4 Remake.jpg" alt="RE4"></div>
         <div class="info">
-            <span class="tag-requisito">Requisitos Medios</span>
-            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA</span>
-            <h3>Minecraft Bedrock</h3>
-            <button class="btn-requisitos" onclick="toggleRequisitos(this)">VER REQUISITOS <span>▼</span></button>
-            <div class="requisitos-content">
-                <div class="requisitos-inner">
-                    <ul><li>💻 RAM: 4 GB</li><li>🎮 Gráfica: Intel HD 4000</li><li>💾 Espacio: 1 GB</li></ul>
-                </div>
-            </div>
+            <span class="tag-requisito">Requisitos Altos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">TERROR / ACCIÓN</span>
+            <h3>Resident Evil 4 Remake</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 8 GB</li><li>🎮 Gráfica: GTX 1050 Ti</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
         </div>
-        <a href="https://www.mediafire.com/file/7mk994oiqe074ow/Minecraft_Bedrock_Edition.iso/file" target="_blank" class="btn-descarga">DESCARGAR</a>
+        <a href="https://gofile.io/d/7zPGEW" class="btn-descarga" target="_blank">DESCARGAR</a>
+    </div>
+
+    <div class="tarjeta" data-requisito="BAJO">
+        <div class="img-container"><img src="imagenes/age of empire 2.jpg" alt="AOE2"></div>
+        <div class="info">
+            <span class="tag-requisito">Requisitos Bajos</span>
+            <span class="categoria" style="font-size: 10px; color: #666;">AVENTURA / ESTRATEGIA</span>
+            <h3>Age of Empire 2</h3>
+            <button class="btn-requisitos" onclick="toggleRequisitos(this)">REQUISITOS <span>▼</span></button>
+            <div class="requisitos-content"><div class="requisitos-inner"><ul><li>💻 RAM: 2 GB</li><li>🎮 Gráfica: Integrada Intel</li></ul></div></div>
+            <div class="caja-password">🔑 CLAVE: <strong>GAMEPIXER</strong></div>
+        </div>
+        <a href="https://www.mediafire.com/file/c32ar38s7r1mndc/A.O.E_2.rar/file" class="btn-descarga">DESCARGAR</a>
     </div>
 
 </div>
 
 <a href="https://wa.me/2665277808" class="btn-whatsapp" target="_blank">💬 Pedir un juego</a>
-
 <footer><p>&copy; 2026 GAMEPIXER PC</p></footer>
 
 <script>
@@ -245,14 +308,17 @@ function buscarJuego() {
 }
 
 function juegoAzar() {
-    let tarjetas = document.querySelectorAll('.tarjeta[style="display: ;"], .tarjeta[style=""]');
-    if(tarjetas.length > 0) {
-        let elegido = tarjetas[Math.floor(Math.random() * tarjetas.length)];
+    let tarjetasVisibles = Array.from(document.querySelectorAll('.tarjeta')).filter(t => t.style.display !== 'none');
+    if(tarjetasVisibles.length > 0) {
+        let elegido = tarjetasVisibles[Math.floor(Math.random() * tarjetasVisibles.length)];
         elegido.scrollIntoView({ behavior: 'smooth', block: 'center' });
         elegido.style.borderColor = "#00bcff";
-        setTimeout(() => { elegido.style.borderColor = "#2a2c2e"; }, 2000);
+        elegido.style.boxShadow = "0 0 20px #00bcff";
+        setTimeout(() => { elegido.style.borderColor = "#2a2c2e"; elegido.style.boxShadow = "none"; }, 2000);
     }
 }
+
+function abrirGuia() { alert("Guía: Descargá, extrae con la clave GAMEPIXER y ejecuta el .exe"); }
 </script>
 </body>
 </html>
