@@ -191,16 +191,16 @@
         }
     </style>
 </head>
-<body>
+<body onload="filtrar('JUEGO', document.getElementById('btn-juegos'))">
 
 <div class="sidebar">
     <div class="sidebar-header">
         <img src="imagenes/logo.jpg" alt="GAMEPIXER">
     </div>
     <div class="nav-links">
-        <div class="nav-item active" onclick="filtrar('TODO', this)"><span>🏠 INICIO</span></div>
-        <div class="nav-item" onclick="filtrar('JUEGO', this)"><span>🎮 JUEGOS</span></div>
+        <div id="btn-juegos" class="nav-item" onclick="filtrar('JUEGO', this)"><span>🎮 JUEGOS</span></div>
         <div class="nav-item" onclick="filtrar('PROGRAMA', this)"><span>💻 PROGRAMAS</span></div>
+        <div class="nav-item" onclick="filtrar('APK', this)"><span>📱 APKs</span></div>
     </div>
 </div>
 
@@ -211,7 +211,8 @@
     </header>
 
     <div class="seccion-estreno">
-        <img src="imagenes/hollow knight silksong.jpg" alt="Estreno" class="foto-estreno"> <div class="info-estreno">
+        <img src="imagenes/hollow knight silksong.jpg" alt="Estreno" class="foto-estreno"> 
+        <div class="info-estreno">
             <strong>🔥 PRÓXIMO ESTRENO: HOLLOW KNIGHT SILKSONG (30%)</strong>
             <p style="font-size: 12px; color: #aaa; margin: 5px 0 0 0;">Contraseña archivos: GAMEPIXER</p>
             <div class="barra-fuera"><div class="barra-dentro"></div></div>
@@ -401,6 +402,14 @@
             <div class="pass-text">Contraseña: GAMEPIXER</div>
         </div>
 
+        <div class="tarjeta" data-tipo="APK">
+            <img src="imagenes/apk-placeholder.jpg">
+            <h3>Próximamente APK</h3>
+            <div class="info-box"><strong>Uso:</strong> Apps modificadas para Android.</div>
+            <a href="#" class="boton-descarga">MUY PRONTO</a>
+            <div class="pass-text">Contraseña: GAMEPIXER</div>
+        </div>
+
     </div>
 </div>
 
@@ -413,11 +422,7 @@
 
         let tarjetas = document.getElementsByClassName('tarjeta');
         for (let t of tarjetas) {
-            if (tipo === 'TODO') {
-                t.style.display = "flex";
-            } else {
-                t.style.display = (t.getAttribute('data-tipo') === tipo) ? "flex" : "none";
-            }
+            t.style.display = (t.getAttribute('data-tipo') === tipo) ? "flex" : "none";
         }
     }
 </script>
