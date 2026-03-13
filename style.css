@@ -1,0 +1,139 @@
+/* Fuente y colores base */
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  border-bottom: 2px solid #00ff88;
+}
+
+/* Buscador */
+.buscador input {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px auto 30px;
+  display: block;
+  font-size: 16px;
+}
+
+/* Filtros de categoría */
+.filtros button {
+  padding: 10px 15px;
+  margin: 5px;
+  background: #00ff88;
+  color: #111;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.filtros button:hover {
+  background: #00cc6a;
+  transform: scale(1.1);
+}
+
+/* Contenedor de juegos */
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 10px 50px;
+  gap: 20px;
+}
+
+/* Tarjeta de juego */
+.juego {
+  background: #1b1b1b;
+  width: 250px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+/* Hover animado tipo Steam */
+.juego:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 136, 0.4);
+}
+
+/* Imagen del juego */
+.juego img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.juego img:hover {
+  transform: scale(1.05);
+}
+
+/* Título del juego */
+.juego h2 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+/* Descripción */
+.juego p {
+  font-size: 14px;
+  min-height: 40px;
+}
+
+/* Botón de descarga grande y llamativo */
+.juego a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 20px;
+  background: #00ff88;
+  color: #111;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.juego a:hover {
+  background: #00cc6a;
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  border-top: 2px solid #00ff88;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .juego {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .juego {
+    width: 90%;
+  }
+
+  .buscador input {
+    width: 95%;
+  }
+}
+
