@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Completo - Service San Luis</title>
+    <style>
+        :root { --samsung: #034ea2; --motorola: #00145e; --apple: #333; --lg: #a50034; --xiaomi: #ff6700; --tcl: #e00007; --whatsapp: #25D366; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 0; }
+        header { background: #1a1a1a; color: white; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .search-box { position: sticky; top: 0; background: white; padding: 15px; z-index: 100; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #buscador { width: 90%; max-width: 600px; padding: 15px; border-radius: 30px; border: 2px solid #ddd; font-size: 1rem; outline: none; }
+        #buscador:focus { border-color: var(--whatsapp); }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .marca-header { color: white; padding: 12px 20px; border-radius: 8px 8px 0 0; margin-top: 30px; font-size: 1.3rem; text-transform: uppercase; font-weight: bold; }
+        .tabla-container { background: white; border-radius: 0 0 8px 8px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th { background: #f8f9fa; padding: 12px; text-align: left; font-size: 0.9rem; color: #666; border-bottom: 2px solid #eee; }
+        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+        tr:hover { background: #f9f9f9; }
+        .precio { font-weight: bold; color: #28a745; white-space: nowrap; font-size: 1.1rem; }
+        .btn-ws { background: var(--whatsapp); color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; font-size: 0.85rem; display: inline-block; }
+        .bg-samsung { background: var(--samsung); } .bg-motorola { background: var(--motorola); }
+        .bg-apple { background: var(--apple); } .bg-lg { background: var(--lg); }
+        .bg-xiaomi { background: var(--xiaomi); } .bg-tcl { background: var(--tcl); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Lista de Precios TEC-MAURI</h1>
+    <p>Todos los modelos y calidad original</p>
+</header>
+
+<div class="search-box">
+    <input type="text" id="buscador" placeholder="Buscá por modelo o calidad (ej: A03, OLED, Incell)..." onkeyup="filtrar()">
+</div>
+
+<div class="container" id="lista-precios">
+    </div>
+
+<script>
+    const nroTelef = "542665061503"; // PONÉ TU WHATSAPP
+
+    const productos = [
+        // --- SAMSUNG ---
+        {m: "Samsung", d: "J4 2018 J400 INCELL", p: "23.499"},
+        {m: "Samsung", d: "J4 CORE / J4 PLUS / J6 PLUS - CALIDAD ORIG", p: "25.210"},
+        {m: "Samsung", d: "J5 PRIME - CALIDAD ORIG", p: "25.159"},
+        {m: "Samsung", d: "J6 J600 - CALIDAD INCELL", p: "27.226"},
+        {m: "Samsung", d: "J7 2016 - CALIDAD INCELL", p: "23.499"},
+        {m: "Samsung", d: "J7 NEO CALIDAD INCELL", p: "23.499"},
+        {m: "Samsung", d: "J7 PRIME CALIDAD ORIG", p: "25.649"},
+        {m: "Samsung", d: "J8 CALIDAD INCELL - CBA", p: "44.900"},
+        {m: "Samsung", d: "A01 - A015 - ORIG VERSION B FPC FINO", p: "23.499"},
+        {m: "Samsung", d: "A01 CORE - A013 - ORIG", p: "27.196"},
+        {m: "Samsung", d: "A02 / M12 / A12 / M022F / M127 / A32 5G - ORIG", p: "24.999"},
+        {m: "Samsung", d: "A02S - A025 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A03 - A035M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A03/A02S/A04E C/MARCO - CALIDAD ORIG", p: "30.550"},
+        {m: "Samsung", d: "A03S - A037 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A03 CORE - A032 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A03 CORE - A032 - CALIDAD ORIG CON MARCO", p: "29.853"},
+        {m: "Samsung", d: "A04 - A045M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A04E - A042M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A04E - A042M C/MARCO - CALIDAD ORIG", p: "37.000"},
+        {m: "Samsung", d: "A04S - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A05 - A055F - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A05S - A057F - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A06 - 065M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A10 - A105 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A10S - A107M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A11 - A115 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A12 - A125M / A127M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A13 - A135M - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A14 4G - A145R - CALIDAD ORIG", p: "40.900"},
+        {m: "Samsung", d: "A14 5G - A146B - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A15 4G - INCELL NEW PREMIUM C/ MARCO", p: "34.900"},
+        {m: "Samsung", d: "A15 5G - INCELL NEW PREM C/ MARCO", p: "29.900"},
+        {m: "Samsung", d: "A16 - CALIDAD ORIGINAL CON MARCO", p: "156.800"},
+        {m: "Samsung", d: "A20 - A205 - OLED C/MARCO", p: "50.938"},
+        {m: "Samsung", d: "A20S - A207 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A21S - A127 - CALIDAD ORIG", p: "24.999"},
+        {m: "Samsung", d: "A21S - A127 - CALIDAD ORIG C/MARCO", p: "29.623"},
+        {m: "Samsung", d: "A22 4G - A225M - OLED C/MARCO", p: "50.938"},
+        {m: "Samsung", d: "A22 5G - A227B - CALIDAD ORIG", p: "29.095"},
+        {m: "Samsung", d: "A23 - A235M - CALIDAD ORIG", p: "29.576"},
+        {m: "Samsung", d: "A23 5G - A236 - CALIDAD ORIG", p: "25.933"},
+        {m: "Samsung", d: "A24 4G - A245F/M13 - OLED C/MARCO", p: "56.773"},
+        {m: "Samsung", d: "A30 - A305 - OLED C/MARCO", p: "52.597"},
+        {m: "Samsung", d: "A30 - A305 - INCELL NEW PREMIUM C/MARCO", p: "34.618"},
+        {m: "Samsung", d: "A30S - A307 - OLED C/MARCO", p: "52.597"},
+        {m: "Samsung", d: "A30S - A307 - INCELL PREMIUM C/MARCO", p: "51.148"},
+        {m: "Samsung", d: "A31 - A315 - OLED C/MARCO", p: "48.387"},
+        {m: "Samsung", d: "A32 - A325M - OLED C/ MARCO", p: "53.931"},
+        {m: "Samsung", d: "A32 5G - A326B - CALIDAD ORIG", p: "40.500"},
+        {m: "Samsung", d: "A34 - A346M - OLED C/MARCO", p: "68.285"},
+        {m: "Samsung", d: "A50 - A505 - OLED C/MARCO", p: "52.597"},
+        {m: "Samsung", d: "A50 - A505 - INCELL PREMIUM C/MARCO", p: "34.757"},
+        {m: "Samsung", d: "A51 - A515 - OLED C/MARCO", p: "52.986"},
+        {m: "Samsung", d: "A52 - A525 - OLED C/MARCO", p: "81.900"},
+        {m: "Samsung", d: "A70 - OLED CON MARCO", p: "74.900"},
+        {m: "Samsung", d: "A72 - OLED CON MARCO", p: "83.300"},
+        {m: "Samsung", d: "S20 FE - OLED C/MARCO - CBA", p: "56.773"},
+
+        // --- MOTOROLA ---
+        {m: "Motorola", d: "MOTOROLA E6 PLUS - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA E6s/E6i - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA E6 PLAY - CALIDAD ORIG", p: "29.744"},
+        {m: "Motorola", d: "MOTOROLA E7/E7i POWER - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA E7i POWER C/MARCO - CALIDAD ORIG", p: "28.822"},
+        {m: "Motorola", d: "MOTOROLA G6 PLAY/E5 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA G6 PLUS - CALIDAD ORIG", p: "38.000"},
+        {m: "Motorola", d: "MOTOROLA G7 PLAY - CALIDAD ORIG", p: "24.472"},
+        {m: "Motorola", d: "MOTOROLA G7/G7 PLUS - CALIDAD ORIG", p: "29.242"},
+        {m: "Motorola", d: "MOTOROLA G7 POWER - CALIDAD ORIG", p: "27.302"},
+        {m: "Motorola", d: "MOTOROLA G8 - CALIDAD ORIG", p: "27.791"},
+        {m: "Motorola", d: "MOTOROLA G8S - CALIDAD ORIG", p: "28.477"},
+        {m: "Motorola", d: "MOTOROLA G8 POWER - CALIDAD ORIG", p: "38.600"},
+        {m: "Motorola", d: "MOTOROLA G8 PLAY/ONE MACRO - CALIDAD ORIG", p: "26.334"},
+        {m: "Motorola", d: "MOTOROLA G8 PLUS - CALIDAD ORIG", p: "27.371"},
+        {m: "Motorola", d: "MOTOROLA G9 PLAY/E7 PLUS - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA G13-G23 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA G20 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA G22-E32 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA G24-G24 POWER-G04 - CALIDAD ORIG", p: "38.369"},
+        {m: "Motorola", d: "MOTOROLA G31-G41-G71 - CALIDAD ORIG", p: "55.470"},
+        {m: "Motorola", d: "MOTOROLA G42 - OLED", p: "58.552"},
+        {m: "Motorola", d: "MOTOROLA G52-G82-EDGE 30 - CALIDAD ORIG", p: "88.500"},
+        {m: "Motorola", d: "MOTOROLA E13 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA E20 - CALIDAD ORIG", p: "24.999"},
+        {m: "Motorola", d: "MOTOROLA E40 - CALIDAD ORIG", p: "24.999"},
+
+        // --- LG ---
+        {m: "LG", d: "LG K22", p: "28.826"},
+        {m: "LG", d: "LG K40 - ORIG", p: "28.826"},
+        {m: "LG", d: "LG K40S - ORIG", p: "28.326"},
+        {m: "LG", d: "LG K41S - ORIG", p: "29.159"},
+        {m: "LG", d: "LG K42-K52-K62 - ORIG", p: "29.159"},
+        {m: "LG", d: "LG K50-K60-Q60 - ORIG", p: "40.500"},
+        {m: "LG", d: "LG K61", p: "30.825"},
+
+        // --- IPHONE ---
+        {m: "iPhone", d: "IPHONE 7 COMUN", p: "30.700"},
+        {m: "iPhone", d: "IPHONE 7 PLUS", p: "61.800"},
+        {m: "iPhone", d: "IPHONE 8 COMUN CALIDAD ORIG", p: "50.600"},
+        {m: "iPhone", d: "IPHONE 8 PLUS/8G", p: "51.600"},
+        {m: "iPhone", d: "IPHONE X HARD OLED - CBA", p: "92.900"},
+        {m: "iPhone", d: "IPHONE XR - FHD CALIDAD ORIGINAL", p: "89.900"},
+        {m: "iPhone", d: "IPHONE XS - HARD OLED", p: "97.900"},
+        {m: "iPhone", d: "IPHONE 11 - HIGH COPY", p: "74.900"},
+
+        // --- XIAOMI ---
+        {m: "Xiaomi", d: "NOTE 7/7 PRO - CALIDAD ORIG", p: "44.500"},
+        {m: "Xiaomi", d: "REDMI 9A/9C/10A - CALIDAD ORIG", p: "27.252"},
+        {m: "Xiaomi", d: "REDMI 12 - CALIDAD ORIG", p: "30.825"},
+        {m: "Xiaomi", d: "REDMI 13C - CALIDAD ORIG", p: "26.017"},
+
+        // --- TCL ---
+        {m: "TCL", d: "TCL 20SE - CALIDAD ORIG", p: "31.549"},
+        {m: "TCL", d: "TCL 30SE / 30E - CALIDAD ORIG", p: "30.287"},
+        {m: "TCL", d: "TCL 40SE - CALIDAD ORIG", p: "30.321"}
+    ];
+
+    function generar() {
+        const contenedor = document.getElementById('lista-precios');
+        const marcas = [...new Set(productos.map(p => p.m))];
+        
+        contenedor.innerHTML = "";
+        marcas.forEach(marca => {
+            let mClass = marca.toLowerCase() === 'iphone' ? 'apple' : marca.toLowerCase();
+            let html = `
+                <div class="marca-grupo" data-marca="${marca.toLowerCase()}">
+                    <div class="marca-header bg-${mClass}">${marca}</div>
+                    <div class="tabla-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Modelo y Calidad</th>
+                                    <th>Precio</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+            `;
+
+            productos.filter(p => p.m === marca).forEach(item => {
+                html += `
+                    <tr class="fila">
+                        <td>${item.d}</td>
+                        <td class="precio">$${item.p}</td>
+                        <td><a href="https://wa.me/${nroTelef}?text=Hola, consulto por: ${item.m} ${item.d}" class="btn-ws" target="_blank">Consultar</a></td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table></div></div>`;
+            contenedor.innerHTML += html;
+        });
+    }
+
+    function filtrar() {
+        const busqueda = document.getElementById('buscador').value.toLowerCase();
+        const filas = document.querySelectorAll('.fila');
+        
+        filas.forEach(f => {
+            const texto = f.innerText.toLowerCase();
+            f.style.display = texto.includes(busqueda) ? "" : "none";
+        });
+
+        document.querySelectorAll('.marca-grupo').forEach(g => {
+            const visibles = g.querySelectorAll('.fila[style=""]').length;
+            g.style.display = visibles > 0 ? "block" : "none";
+        });
+    }
+
+    generar();
+</script>
+
+</body>
+</html>
